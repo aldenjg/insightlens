@@ -12,6 +12,7 @@ dynamodb = boto3.resource("dynamodb", region_name=region)
 s3 = boto3.client("s3")
 BUCKET_NAME = "insightlens-docs-bucket"
 
+
 def generate_presigned_post():
     document_id = str(uuid.uuid4())
     key = f"uploads/{document_id}.pdf"

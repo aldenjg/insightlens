@@ -7,6 +7,7 @@ lambda_client = boto3.client("lambda", region_name=region)
 s3 = boto3.client("s3", region_name=region)
 dynamodb = boto3.resource("dynamodb", region_name=region)
 
+
 def invoke_poller_lambda(document_id, textract_job_id):
     payload = {
         "document_id": document_id,

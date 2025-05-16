@@ -25,5 +25,4 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run linter
-        # Only lint your own code, exclude site-packages
         run: flake8 --exclude=.venv,venv,env,*/site-packages/*,*/__pycache__/*,*/\.*/*

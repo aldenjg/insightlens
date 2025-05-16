@@ -19,6 +19,7 @@ app = FastAPI(
     version="1.0.0"
 )
 
+
 def get_aws_config():
     region = os.environ.get("AWS_REGION")
     if not region:
@@ -26,31 +27,39 @@ def get_aws_config():
         region = "us-west-2"
     return {"region_name": region}
 
+
 def get_s3_client():
     return boto3.client("s3", **get_aws_config())
+
 
 def get_dynamodb_resource():
     return boto3.resource("dynamodb", **get_aws_config())
 
+
 def get_textract_client():
     return boto3.client("textract", **get_aws_config())
 
+
 def get_lambda_client():
     return boto3.client("lambda", **get_aws_config())
+
 
 def get_documents_table():
     dynamodb = get_dynamodb_resource()
     return dynamodb.Table('insightlens-documents')
 
+
 def get_search_index_table():
     dynamodb = get_dynamodb_resource()
     return dynamodb.Table('insightlens-search-index')
+
 
 # API endpoints
 @app.get("/health")
 def health():
     """Health check endpoint for monitoring and load balancing"""
     return {"status": "healthy"}
+
 
 @app.get("/search")
 def search_documents(
@@ -71,6 +80,7 @@ def search_documents(
             detail="Error searching documents"
         )
 
+
 @app.get("/upload-url")
 def get_upload_url():
     """Generate a presigned URL for document upload"""
@@ -83,6 +93,7 @@ def get_upload_url():
             detail="Error generating upload URL"
         )
 
+
 @app.post("/poll")
 def poll_textract(document_id: str, textract_job_id: str):
     """Poll Textract for job completion"""
@@ -92,6 +103,7 @@ def poll_textract(document_id: str, textract_job_id: str):
     except Exception as e:
         logger.error(f"Error polling Textract: {str(e)}")
         raise HTTPException(status_code=500, detail="Error polling Textract")
+
 
 @app.get("/keyword-search")
 def keyword_search(
