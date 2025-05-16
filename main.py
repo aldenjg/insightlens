@@ -66,7 +66,10 @@ def search_documents(
         return {"results": results}
     except Exception as e:
         logger.error(f"Error searching documents: {str(e)}")
-        raise HTTPException(status_code=500, detail="Error searching documents")
+        raise HTTPException(
+            status_code=500,
+            detail="Error searching documents"
+        )
 
 @app.get("/upload-url")
 def get_upload_url():
@@ -75,7 +78,10 @@ def get_upload_url():
         return generate_presigned_post()
     except Exception as e:
         logger.error(f"Error generating upload URL: {str(e)}")
-        raise HTTPException(status_code=500, detail="Error generating upload URL")
+        raise HTTPException(
+            status_code=500,
+            detail="Error generating upload URL"
+        )
 
 @app.post("/poll")
 def poll_textract(document_id: str, textract_job_id: str):
@@ -100,4 +106,7 @@ def keyword_search(
         return {"results": response.get("Items", [])}
     except Exception as e:
         logger.error(f"Error searching by keyword: {str(e)}")
-        raise HTTPException(status_code=500, detail="Error searching by keyword")
+        raise HTTPException(
+            status_code=500,
+            detail="Error searching by keyword"
+        )
