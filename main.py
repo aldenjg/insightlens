@@ -122,3 +122,8 @@ def keyword_search(
             status_code=500,
             detail="Error searching by keyword"
         )
+
+
+@app.get("/")
+def root():
+    return {"message": "InsightLens API is running. Visit /docs for Swagger UI."}
