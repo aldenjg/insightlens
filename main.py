@@ -89,7 +89,6 @@ def search_documents(
             detail="Error searching documents"
         )
 
-
 @app.get("/upload-url")
 def get_upload_url():
     try:
@@ -100,8 +99,6 @@ def get_upload_url():
             status_code=500,
             detail=f"Error generating upload URL: {str(e)}"
         )
-
-
 
 @app.post("/poll")
 def poll_textract(document_id: str, textract_job_id: str):
