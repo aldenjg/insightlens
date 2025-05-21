@@ -5,6 +5,21 @@ from fastapi import FastAPI, Query, HTTPException, Depends
 from s3_utils import generate_presigned_post
 from lambda_invoker import invoke_poller_lambda
 import logging
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI(
+    title="InsightLens API",
+    description="API for document processing and analysis",
+    version="1.0.0"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 🔓 For dev only! Use ["http://localhost:5174"] for safer config
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # config logging
 logging.basicConfig(
@@ -12,12 +27,6 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 logger = logging.getLogger(__name__)
-
-app = FastAPI(
-    title="InsightLens API",
-    description="API for document processing and analysis",
-    version="1.0.0"
-)
 
 
 def get_aws_config():
