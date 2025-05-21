@@ -15,7 +15,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # 🔓 For dev only! Use ["http://localhost:5174"] for safer config
+    allow_origins=["*"],  # For dev only Use ["http://localhost:5174"] for safer config
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -92,15 +92,15 @@ def search_documents(
 
 @app.get("/upload-url")
 def get_upload_url():
-    """Generate a presigned URL for document upload"""
     try:
         return generate_presigned_post()
     except Exception as e:
         logger.error(f"Error generating upload URL: {str(e)}")
         raise HTTPException(
             status_code=500,
-            detail="Error generating upload URL"
+            detail=f"Error generating upload URL: {str(e)}"
         )
+
 
 
 @app.post("/poll")
