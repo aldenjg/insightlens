@@ -1,8 +1,6 @@
 # InsightLens Backend
 
-This is the backend service for **InsightLens**, a document management and classification platform built with FastAPI and deployed using AWS ECS and S3.
-
-The backend handles secure file uploads, document metadata management, and is designed for easy integration with ML classification services.
+This is the backend service for **InsightLens**, a document management and classification platform built with FastAPI and deployed using AWS ECS and S3. The backend handles secure file uploads, document metadata management, and is designed for easy integration with ML classification services.
 
 ---
 
@@ -29,21 +27,22 @@ The backend handles secure file uploads, document metadata management, and is de
 
 ## 📁 Project Structure
 
+```
 insightlens-backend/
-├── .github/workflows/ # GitHub Actions CI/CD pipeline
-│ └── deploy.yml
-├── pycache/ # Python bytecode cache (ignored)
-├── venv/ # Virtual environment (ignored)
-├── main.py # FastAPI application entry point
-├── s3_utils.py # Helper functions for AWS S3 uploads
-├── lambda_invoker.py # (Optional) AWS Lambda invocation script
-├── requirements.txt # Python dependencies
-├── Dockerfile # Docker image for backend service
-├── docker-compose.yml # Optional local container orchestration
-├── .gitignore # Files to exclude from version control
-├── .flake8 # Linting configuration
-└── README.md # Project documentation
-
+├── .github/workflows/     # GitHub Actions CI/CD pipeline
+│   └── deploy.yml
+├── __pycache__/          # Python bytecode cache (ignored)
+├── venv/                 # Virtual environment (ignored)
+├── main.py               # FastAPI application entry point
+├── s3_utils.py           # Helper functions for AWS S3 uploads
+├── lambda_invoker.py     # (Optional) AWS Lambda invocation script
+├── requirements.txt      # Python dependencies
+├── Dockerfile            # Docker image for backend service
+├── docker-compose.yml    # Optional local container orchestration
+├── .gitignore           # Files to exclude from version control
+├── .flake8              # Linting configuration
+└── README.md            # Project documentation
+```
 
 ---
 
@@ -54,45 +53,70 @@ insightlens-backend/
 ```bash
 git clone https://github.com/yourusername/insightlens-backend.git
 cd insightlens-backend
+```
 
+### 2. Create a .env file
 
-2. Create a .env file
-
+```env
 AWS_ACCESS_KEY_ID=your_key
 AWS_SECRET_ACCESS_KEY=your_secret
 S3_BUCKET_NAME=your_bucket
 S3_REGION=us-west-2
-Do not commit .env or venv/ to version control.
+```
 
-3. Run locally with FastAPI + Uvicorn
+> **Note:** Do not commit `.env` or `venv/` to version control.
+
+### 3. Run locally with FastAPI + Uvicorn
+
+```bash
 pip install -r requirements.txt
 uvicorn main:app --reload
+```
 
-🐳 Docker
-Build and run locally
+---
+
+## 🐳 Docker
+
+### Build and run locally
+
+```bash
 docker build -t insightlens-backend .
 docker run -p 8000:8000 insightlens-backend
+```
 
-Or use Docker Compose:
+### Or use Docker Compose:
+
+```bash
 docker-compose up --build
+```
 
-☁️ CI/CD Deployment to AWS
+---
+
+## ☁️ CI/CD Deployment to AWS
+
 This repository uses GitHub Actions to automate deployment:
 
-Builds Docker image
-
-Pushes to Amazon ECR
-
-Deploys to ECS Fargate
-
-Logs to CloudWatch
+- Builds Docker image
+- Pushes to Amazon ECR
+- Deploys to ECS Fargate
+- Logs to CloudWatch
 
 Secrets (AWS credentials, ECR URI, etc.) are configured via GitHub repository settings.
 
-🤝 Contributing
-Pull requests and issues are welcome. Please lint with: flake8 .
+---
 
-📬 Contact
-Built by Alden JG
+## 🤝 Contributing
+
+Pull requests and issues are welcome. Please lint with:
+
+```bash
+flake8 .
+```
+
+---
+
+## 📬 Contact
+
+Built by **Alden JG**
+
 Feel free to reach out with questions or ideas!
-
