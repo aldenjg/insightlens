@@ -135,3 +135,16 @@ def keyword_search(
 @app.get("/")
 def root():
     return {"message": "InsightLens API is running. Visit /docs for Swagger UI."}
+
+
+@app.get("/document/{document_id}")
+def get_document(document_id: str, table=Depends(get_documents_table)):
+    try:
+        response = table.get_item(Key={"document_id": document_id})
+        item = response.get("Item")
+        if not item:
+            raise HTTPException(status_code=404, detail="Document not found")
+        return {"document_id": item["document_id"], "text": item.get("extracted_text", "")}
+    except Exception as e:
+        logger.error(f"Error retrieving document: {str(e)}")
+        raise HTTPException(status_code=500, detail="Error retrieving document")
