@@ -51,7 +51,7 @@ insightlens-backend/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/insightlens-backend.git
+git clone https://github.com/aldenjg/insightlens-backend.git
 cd insightlens-backend
 ```
 
